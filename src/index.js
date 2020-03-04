@@ -82,9 +82,35 @@ console.log("Hello from src/index.js!");
   // })
 
 
+// EXTRA LAST STEP: REFACTORING WITH FUNCTIONS
+const results = document.querySelector("#results");
+const form = document.querySelector("#search-movies");
+const userInput = document.getElementById('keyword');
 
+// AJAX REQUEST / API CALL
+const callbackfunctionAPI = (keyword) => {
+ fetch(`http://www.omdbapi.com/?s=${keyword.value}&apikey=d4b9c62c`)// promise pending;
+  .then((response) => response.json())//promise pending but json;
+  .then((data) => {
+      data.Search.forEach((result) => {
+        const poster = result.Poster;
+        const title = result.Title;
+        const movie = `<li class="list-inline-item">
+        <img src="${poster}" alt="">
+         <p>${title}</p>
+        </li>`
+        results.insertAdjacentHTML("beforeend", movie)
+      })
+    });
+}
 
-
+// binding the form to the event submit t
+form.addEventListener("submit", (event) => {
+  const userInput = document.getElementById('keyword');
+  event.preventDefault();
+  results.innerHTML = "";
+  callbackfunctionAPI(userInput)
+});
 
 
 
