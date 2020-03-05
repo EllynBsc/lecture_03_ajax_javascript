@@ -82,35 +82,83 @@ console.log("Hello from src/index.js!");
   // })
 
 
-// EXTRA LAST STEP: REFACTORING WITH FUNCTIONS
-const results = document.querySelector("#results");
+
+// //2. importing my function callbackFunctionAPI
+// import { callbackfunctionAPI } from "./movie";
+// import { insertMovie } from "./movie";
+
+// //importing my plugin sortable
+// import { initSortable } from "./plugins/init_sortable"
+// //invoke the function
+// initSortable();
+
+
+// //import my plugin markdownit
+// import { initMarkdown } from "./plugins/init_markdown"
+// //invoke the function
+// initMarkdown();
+
+// //import my plugin select2
+// import { initSelect2 } from "./plugins/init_select2"
+// //invoke the function
+// initSelect2();
+
+
+
+
+// const results = document.querySelector("#results");
+// const form = document.querySelector("#search-movies");
+// const userInput = document.getElementById('keyword');
+
+// // binding the form to the event submit
+// form.addEventListener("submit", (event) => {
+//   const userInput = document.getElementById('keyword');
+//   event.preventDefault();
+//   results.innerHTML = "";
+//   callbackfunctionAPI(userInput)
+// });
+
+
+
+
+
+//LAST PART LECTURE: REFACTORING and cleaning our main entry file index.js
+
+
+
+//import of functions and plugins
+import { callbackfunctionAPI } from "./movie";
+import { insertMovie } from "./movie";
+import { initSortable } from "./plugins/init_sortable"
+import { initMarkdown } from "./plugins/init_markdown"
+import { initSelect2 } from "./plugins/init_select2"
+
+
+//invoke the plugins
+initSortable();
+initSelect2();
+initMarkdown();
+
+
 const form = document.querySelector("#search-movies");
-const userInput = document.getElementById('keyword');
-
-// AJAX REQUEST / API CALL
-const callbackfunctionAPI = (keyword) => {
- fetch(`http://www.omdbapi.com/?s=${keyword.value}&apikey=d4b9c62c`)// promise pending;
-  .then((response) => response.json())//promise pending but json;
-  .then((data) => {
-      data.Search.forEach((result) => {
-        const poster = result.Poster;
-        const title = result.Title;
-        const movie = `<li class="list-inline-item">
-        <img src="${poster}" alt="">
-         <p>${title}</p>
-        </li>`
-        results.insertAdjacentHTML("beforeend", movie)
-      })
-    });
-}
-
-// binding the form to the event submit t
+// binding the form to the event submit
 form.addEventListener("submit", (event) => {
   const userInput = document.getElementById('keyword');
   event.preventDefault();
   results.innerHTML = "";
   callbackfunctionAPI(userInput)
 });
+
+
+
+
+
+
+
+
+
+
+
 
 
 
